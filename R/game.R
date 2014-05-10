@@ -192,4 +192,9 @@ recurBind <- function(dList) {
   return(data)
 }
 
+#' Season Data
+#'
+#' @docType data
+#' @name season
+NULL
 
