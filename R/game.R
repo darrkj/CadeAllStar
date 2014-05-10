@@ -222,6 +222,13 @@ cleanup <- function(basic) {
   # A very small amount of these were missing, '' in earlier data.
   basic[basic$PM == '', ]$PM <- 0
   
+  change <- (1:ncol(basic))[!(names(basic) %in% c('player', 'date', 'guid'))]
+  
+  # Transform all characters into integers 
+  for ( i in change) {
+    basic[, i] <- as.integer(basic[, i])
+  }
+  
   basic
 }
 
