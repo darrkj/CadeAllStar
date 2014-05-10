@@ -192,6 +192,40 @@ recurBind <- function(dList) {
   return(data)
 }
 
+cleanup <- function(basic) {
+  # Change the wierd namve Starters to player
+  names(basic)[1] <- 'player'
+  
+  # Clear split lines for starters and reserves
+  basic <- basic[basic$player != 'Reserves', ]
+  
+  # Add id field
+  basic$id <- 1:nrow(basic)
+  
+  # Only two of three are needed FG FGA  FG.
+  basic$`FG.` <- NULL
+  basic$`X3P.` <- NULL
+  basic$`FT.` <- NULL
+  
+  # Create seconds played from MP, character "43:39" min:sec
+  tmp <- strsplit(basic$MP, ':')
+  
+  basic$SP <- as.numeric(lapply(tmp, '[[', 1)) * 60 + 
+    as.numeric(lapply(tmp, '[[', 1))
+  
+  # No longer need minutes played
+  basic$MP <- NULL
+  
+  # Give fields more idiomatic names
+  basic <- rename(basic, replace = c('X...' = 'PM'))
+  
+  # A very small amount of these were missing, '' in earlier data.
+  basic[basic$PM == '', ]$PM <- 0
+  
+  basic
+}
+
+
 
 pull_stats <- function(s) {
   # Init list
@@ -214,8 +248,14 @@ pull_stats <- function(s) {
                         data.frame(boxScore$homeBasic, date, guid))
   }
   # Clean data up into one data frame 
-  recurBind(stats)[[1]]
+  stats <- recurBind(stats)[[1]]
+  cleanup(stats)
 }
+
+
+
+
+
 
 
 
