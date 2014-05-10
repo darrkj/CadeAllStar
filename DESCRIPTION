@@ -10,5 +10,5 @@ License: What license is it under?
 Depends:
     devtools
 Collate:
-    ‘game.R’
+    ‘game.R’,
     ‘cade.R’
