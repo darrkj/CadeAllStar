@@ -1,9 +1,4 @@
 
-
-# Add this to boRg
-classes <- function(x) unlist(lapply(x, class))
-
-
 # Would it make more sense to have this as generic function and
 # dispatch the results based on type, uni.character vs uni.integer
 uni <- function(x, len = length(x)) {

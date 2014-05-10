@@ -199,9 +199,6 @@ cleanup <- function(basic) {
   # Clear split lines for starters and reserves
   basic <- basic[basic$player != 'Reserves', ]
   
-  # Add id field
-  basic$id <- 1:nrow(basic)
-  
   # Only two of three are needed FG FGA  FG.
   basic$`FG.` <- NULL
   basic$`X3P.` <- NULL
@@ -258,10 +255,6 @@ pull_stats <- function(s) {
   stats <- recurBind(stats)[[1]]
   cleanup(stats)
 }
-
-
-
-
 
 
 
