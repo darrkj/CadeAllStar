@@ -192,9 +192,43 @@ recurBind <- function(dList) {
   return(data)
 }
 
+
+pull_stats <- function(s) {
+  # Init list
+  stats <- list()
+  
+  # Number of games in season
+  len <- nrow(s)
+  
+  # Loop over all games to get box score for a given game
+  for (i in 1:len) {
+    print(i / len)
+    # Pulls box score for the lk lookup string
+    boxScore <- box_score(s[i, ]$lk)
+    
+    date <- s[i, 'date']
+    guid <- s[i, 'guid']
+    
+    # Append the basic and advanced states for the home and away teams
+    stats[[i]] <- rbind(data.frame(boxScore$awayBasic, date, guid),
+                        data.frame(boxScore$homeBasic, date, guid))
+  }
+  # Clean data up into one data frame 
+  recurBind(stats)[[1]]
+}
+
+
+
 #' Season Data
 #'
 #' @docType data
 #' @name season
+NULL
+
+
+#' Stat Data
+#'
+#' @docType data
+#' @name stats
 NULL
 
