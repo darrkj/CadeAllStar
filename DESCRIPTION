@@ -1,14 +1,8 @@
 Package: CadeAllStar
-Type: Package
-Title: NBA Outlier Detection
+Title: Supplies NBA data
 Version: 0.1
-Date: 2014-05-08
-Author: Kenny Darrell
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: A start at grouping some functionality together.
+Authors@R: "First Last <first.last@example.com> [aut, cre]"
+Description: What the package does (paragraph)
+Depends: R (>= 3.1.0)
 License: What license is it under?
-Depends:
-    devtools
-Collate:
-    ‘game.R’,
-    ‘cade.R’
+LazyData: true
